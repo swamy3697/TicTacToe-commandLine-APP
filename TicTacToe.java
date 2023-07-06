@@ -19,6 +19,7 @@ public class TicTacToe{
         Scanner scan=new Scanner(System.in);
         obj=new Main();
         int count =0;
+
         draw=true;
         obj.showmatrix(positionArray);
         while (count <9)
