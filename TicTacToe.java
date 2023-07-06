@@ -2,8 +2,6 @@
 import java.util.Scanner;
 
 public class TicTacToe{
-    static int end;
-    static int srt;
     static String[][] positionArray = new String[][]{{"1", "2", "3"}, {"4", "5", "6"}, {"7", "8", "9"}};
     static String[][] matrix = new String[][]{{"0", "0", "0"}, {"0", "0", "0"}, {"0", "0", "0"}};
     static String[][] matrixCopy=new String[][]{{"0", "0", "0"}, {"0", "0", "0"}, {"0", "0", "0"}};
@@ -12,13 +10,16 @@ public class TicTacToe{
     static int[] returnedPosition;
     static int areaInMatrix;
     static int placeArea;
-    static TicTacToe obj;
+    static Main obj;
     static String status;
+    static String win="Win";
+    static Boolean draw;
     public static void main(String[] args) {
         whosTurn ="X";
         Scanner scan=new Scanner(System.in);
-      obj=new TicTacToe();
-      int count =0;
+        obj=new Main();
+        int count =0;
+        draw=true;
         obj.showmatrix(positionArray);
         while (count <9)
         {
@@ -28,6 +29,8 @@ public class TicTacToe{
             returnedPosition= obj.position(posistionInPositionArray);
             areaInMatrix=returnedPosition[0];
             placeArea=returnedPosition[1];
+            System.out.println(areaInMatrix);
+            System.out.println(placeArea);
             if(matrix[areaInMatrix][placeArea]=="0")
             {
                 count++;
@@ -35,9 +38,10 @@ public class TicTacToe{
                 obj.showmatrix(matrix);
 
                 status=obj.check(areaInMatrix,placeArea);
-                if(status=="win")
+                if(status.equals(win))
                 {
                     System.out.println(whosTurn +" is won the game ");
+                    draw=false;
                     break;
                 }
                 whosTurn=(whosTurn=="X") ?  "O" : "X";
@@ -47,7 +51,11 @@ public class TicTacToe{
                 System.out.println("that is place is already filled with" +matrix[areaInMatrix][placeArea]);
             }
         }
-        System.out.println("Game Is Draw Play Agian...");
+        if(draw==true)
+        {
+            System.out.println("Game Is Draw Play Agian...");
+        }
+
 
     }
     public int[] position(int place){
@@ -72,7 +80,7 @@ public class TicTacToe{
             case 9:
                 return new int[]{2,2};
         }
-    return new int[]{0,0};
+        return new int[]{0,2};
     }
     public void showmatrix(String[][] arr){
         for (int i = 0; i <= 2; i++)
@@ -92,110 +100,111 @@ public class TicTacToe{
         switch(areaInMatrix)
         {
             case 0:
-                if (obj.fristHorizontalCheck()=="win")
+                if (obj.fristHorizontalCheck()==win)
                 {
-                    return "win";
+                    return win;
                 }
                 if (placeArea==0)
                 {
-                    if (obj.firstVerticalCheck()=="win")
+                    if (obj.firstVerticalCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
-                    if (obj.leftcrossCheck()=="win")
+                    if (obj.leftcrossCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
                 }
                 if (placeArea==1)
                 {
-                    if (obj.secondVerticalCheck()=="win")
+                    if (obj.secondVerticalCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
 
                 }
                 if (placeArea==2)
                 {
-                    if (obj.thirdVerticalCheck()=="win")
+
+                    if (obj.thirdVerticalCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
-                    if (leftcrossCheck()=="win")
+                    if (rightcrossCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
 
                 }
-            break;
+                break;
             case 1:
-                if (obj.secondHorizontalCheck()=="win")
+                if (obj.secondHorizontalCheck()==win)
                 {
-                    return "win";
+                    return win;
                 }
                 if (placeArea==0)
                 {
-                    if (obj.firstVerticalCheck()=="win")
+                    if (obj.firstVerticalCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
 
                 }
                 if (placeArea==1)
                 {
-                    if (obj.leftcrossCheck()=="win")
+                    if (obj.leftcrossCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
-                    if (obj.rightcrossCheck()=="win")
+                    if (obj.rightcrossCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
-                    if (obj.secondVerticalCheck()=="win")
+                    if (obj.secondVerticalCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
 
                 }
                 if (placeArea==2)
                 {
-                    if (obj.thirdVerticalCheck()=="win")
+                    if (obj.thirdVerticalCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
                 }
-            break;
+                break;
             case 2:
-                if (obj.thirdHorizontalCheck()=="win")
+                if (obj.thirdHorizontalCheck()==win)
                 {
-                    return "win";
+                    return win;
                 }
                 if (placeArea==0)
                 {
-                    if (obj.firstVerticalCheck()=="win")
+                    if (obj.firstVerticalCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
-                    if (obj.rightcrossCheck()=="win")
+                    if (obj.rightcrossCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
 
                 }
                 if (placeArea==1)
                 {
-                    if (obj.secondVerticalCheck()=="win")
+                    if (obj.secondVerticalCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
 
@@ -203,13 +212,13 @@ public class TicTacToe{
                 }
                 if (placeArea==2)
                 {
-                    if (obj.thirdVerticalCheck()=="win")
+                    if (obj.thirdVerticalCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
-                    if (obj.leftcrossCheck()=="win")
+                    if (obj.leftcrossCheck()==win)
                     {
-                        return "win";
+                        return win;
                     }
 
                 }
@@ -224,7 +233,7 @@ public class TicTacToe{
     {
         if((matrix[0][0] == matrix[0][1]) && (matrix[0][0] == matrix[0][2]))
         {
-            return "win";
+            return win;
         }
         return "Loss";
     }
@@ -232,7 +241,7 @@ public class TicTacToe{
     {
         if((matrix[1][0] == matrix[1][1]) && (matrix[1][0] == matrix[1][2]))
         {
-            return "win";
+            return win;
         }
         return "Loss";
     }
@@ -240,7 +249,7 @@ public class TicTacToe{
     {
         if((matrix[2][0] == matrix[2][1]) && (matrix[2][0] == matrix[2][2]))
         {
-            return "win";
+            return win;
         }
         return "Loss";
     }
@@ -248,7 +257,7 @@ public class TicTacToe{
     {
         if((matrix[0][0] == matrix[1][0]) && (matrix[0][0] == matrix[2][0]))
         {
-            return "win";
+            return win;
         }
         return "Loss";
     }
@@ -256,15 +265,15 @@ public class TicTacToe{
     {
         if((matrix[0][1] == matrix[1][1]) && (matrix[0][1] == matrix[2][1]))
         {
-            return "win";
+            return win;
         }
         return "Loss";
     }
     public String thirdVerticalCheck()
     {
-        if((matrix[2][0] == matrix[1][2]) && (matrix[2][0] == matrix[2][2]))
+        if((matrix[0][2] == matrix[1][2]) && (matrix[0][2] == matrix[2][2]))
         {
-            return "win";
+            return win;
         }
         return "Loss";
     }
@@ -272,7 +281,7 @@ public class TicTacToe{
     {
         if((matrix[0][0] == matrix[1][1]) && (matrix[0][0] == matrix[2][2]))
         {
-            return "win";
+            return win;
         }
         return "Loss";
     }
@@ -280,8 +289,8 @@ public class TicTacToe{
     {
         if((matrix[0][2] == matrix[1][1]) && (matrix[0][2] == matrix[2][0]))
         {
-            return "win";
+            return win;
         }
         return "Loss";
     }
-    }
+}
